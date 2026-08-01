@@ -1,0 +1,533 @@
+/* ============================================================
+   William Gabriel — Portfólio
+   Direção: identidade de "editor de código" — abas, comentários
+   e badges de terminal, porque o assunto é, literalmente, código.
+   ============================================================ */
+
+@import url('https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@500;600;700&family=Inter:wght@400;500;600&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+:root {
+    --bg: #0d1117;
+    --panel: #141b26;
+    --panel-border: #232c3d;
+    --text: #e8ecf4;
+    --text-muted: #8d97ac;
+    --accent: #6ee7d8;
+    --accent-soft: rgba(110, 231, 216, 0.12);
+    --amber: #f5a85c;
+    --amber-soft: rgba(245, 168, 92, 0.12);
+    --radius: 10px;
+
+    --font-display: 'Space Grotesk', sans-serif;
+    --font-body: 'Inter', sans-serif;
+    --font-mono: 'JetBrains Mono', monospace;
+}
+
+@media (prefers-reduced-motion: reduce) {
+    * {
+        animation-duration: 0.01ms !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+* {
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    margin: 0;
+    background-color: var(--bg);
+    background-image:
+        radial-gradient(circle at 15% 0%, rgba(110, 231, 216, 0.06), transparent 40%),
+        radial-gradient(circle at 85% 20%, rgba(245, 168, 92, 0.05), transparent 35%);
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 16px;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 3px;
+    border-radius: 4px;
+}
+
+h1, h2, h3 {
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.01em;
+}
+
+/* ---------- Container util (sem alterar o HTML) ---------- */
+
+header,
+section,
+footer > p,
+footer > section {
+    padding-left: clamp(1.25rem, 5vw, 4rem);
+    padding-right: clamp(1.25rem, 5vw, 4rem);
+}
+
+/* ---------- Header / "barra de abas" ---------- */
+
+header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    padding-top: 1.1rem;
+    padding-bottom: 1.1rem;
+    background-color: rgba(13, 17, 23, 0.85);
+    backdrop-filter: blur(10px);
+    border-bottom: 1px solid var(--panel-border);
+}
+
+header h1 {
+    font-size: 1.15rem;
+    color: var(--text);
+    display: flex;
+    align-items: center;
+    gap: 0.6rem;
+}
+
+header h1::before {
+    content: '';
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    background: var(--accent);
+    box-shadow: 0 0 12px var(--accent);
+    flex-shrink: 0;
+}
+
+header h1::after {
+    content: '/ portfólio';
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+nav ul {
+    list-style: none;
+    display: flex;
+    gap: 0.4rem;
+    margin: 0;
+    padding: 0;
+}
+
+nav a {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--text-muted);
+    padding: 0.5rem 0.9rem;
+    border-radius: 6px;
+    border: 1px solid transparent;
+    display: inline-flex;
+    align-items: center;
+    gap: 0.5rem;
+    transition: color 0.2s ease, border-color 0.2s ease, background-color 0.2s ease;
+}
+
+nav a::before {
+    content: '●';
+    font-size: 0.55rem;
+    color: var(--accent);
+    opacity: 0.7;
+}
+
+nav a:hover,
+nav a:focus-visible {
+    color: var(--text);
+    background-color: var(--panel);
+    border-color: var(--panel-border);
+}
+
+/* ---------- Seções — estrutura geral ---------- */
+
+section {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: clamp(3rem, 8vw, 5.5rem);
+    padding-bottom: clamp(3rem, 8vw, 5.5rem);
+}
+
+section > h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    margin-bottom: 2.25rem;
+    position: relative;
+    padding-left: 1.6rem;
+}
+
+/* Eyebrow em estilo "comentário de código" — recurso central da identidade */
+section > h2::before {
+    content: '// ';
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.85em;
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+}
+
+/* ---------- #sobre ---------- */
+
+#sobre {
+    display: grid;
+    grid-template-columns: auto 1fr 260px;
+    grid-template-areas:
+        "title title title"
+        "photo article aside";
+    column-gap: 2.75rem;
+    row-gap: 2rem;
+    align-items: start;
+}
+
+#sobre > h2 {
+    grid-area: title;
+}
+
+#sobre > img {
+    grid-area: photo;
+    width: 168px !important;
+    height: 168px !important;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 3px solid var(--panel-border);
+    outline: 2px solid var(--accent);
+    outline-offset: 6px;
+    box-shadow: 0 20px 40px -20px rgba(0, 0, 0, 0.6);
+}
+
+#sobre > article {
+    grid-area: article;
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 1.75rem 2rem;
+}
+
+#sobre > article p {
+    margin: 0;
+    color: var(--text);
+    font-size: 1.02rem;
+}
+
+#sobre > aside {
+    grid-area: aside;
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 1.5rem 1.75rem;
+}
+
+#sobre > aside h3 {
+    font-family: var(--font-mono);
+    font-size: 0.78rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--text-muted);
+    margin-bottom: 1rem;
+}
+
+#sobre > aside ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.6rem;
+}
+
+#sobre > aside li {
+    font-family: var(--font-mono);
+    font-size: 0.88rem;
+    color: var(--text);
+    background-color: var(--accent-soft);
+    border: 1px solid rgba(110, 231, 216, 0.25);
+    border-radius: 6px;
+    padding: 0.45rem 0.75rem;
+}
+
+/* ---------- #projetos ---------- */
+
+#projetos article {
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-left: 3px solid var(--accent);
+    border-radius: var(--radius);
+    padding: 1.75rem 2rem;
+    transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+#projetos article:hover {
+    transform: translateY(-3px);
+    border-color: var(--accent);
+}
+
+#projetos h3 {
+    font-size: 1.2rem;
+    margin-bottom: 0.6rem;
+}
+
+#projetos p {
+    margin: 0;
+    color: var(--text-muted);
+}
+
+/* ---------- #habilidades — tabela estilo terminal ---------- */
+
+#habilidades table {
+    width: 100%;
+    border-collapse: collapse;
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    overflow: hidden;
+}
+
+#habilidades thead th {
+    font-family: var(--font-mono);
+    font-size: 0.75rem;
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--accent);
+    text-align: left;
+    padding: 0.9rem 1.25rem;
+    background-color: rgba(110, 231, 216, 0.06);
+    border-bottom: 1px solid var(--panel-border);
+}
+
+#habilidades tbody td {
+    padding: 1rem 1.25rem;
+    border-bottom: 1px solid var(--panel-border);
+    color: var(--text);
+    vertical-align: top;
+}
+
+#habilidades tbody tr:last-child td {
+    border-bottom: none;
+}
+
+#habilidades tbody tr:hover {
+    background-color: rgba(255, 255, 255, 0.02);
+}
+
+#habilidades td:first-child {
+    font-family: var(--font-mono);
+    font-weight: 500;
+    white-space: nowrap;
+}
+
+#habilidades td:nth-child(2) {
+    font-family: var(--font-mono);
+    font-size: 0.85rem;
+    color: var(--amber);
+    white-space: nowrap;
+}
+
+#habilidades td:nth-child(3) {
+    color: var(--text-muted);
+}
+
+/* ---------- Footer / Contato ---------- */
+
+footer {
+    border-top: 1px solid var(--panel-border);
+    background-color: #0a0e14;
+    margin-top: 2rem;
+}
+
+footer > p {
+    max-width: 1080px;
+    margin: 0 auto;
+    padding-top: 1.5rem;
+    padding-bottom: 0;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+}
+
+footer #Contato {
+    max-width: 1080px;
+    margin: 0 auto;
+}
+
+footer #Contato h2 {
+    font-size: clamp(1.6rem, 3vw, 2.1rem);
+    position: relative;
+    padding-left: 1.6rem;
+    margin-bottom: 0.75rem;
+}
+
+footer #Contato h2::before {
+    content: '// ';
+    font-family: var(--font-mono);
+    font-weight: 400;
+    font-size: 0.85em;
+    color: var(--accent);
+    position: absolute;
+    left: 0;
+}
+
+footer #Contato > p {
+    color: var(--text-muted);
+    margin-bottom: 2rem;
+}
+
+footer form {
+    max-width: 560px;
+    background-color: var(--panel);
+    border: 1px solid var(--panel-border);
+    border-radius: var(--radius);
+    padding: 2rem 2.25rem 2.25rem;
+}
+
+footer form label {
+    display: block;
+    font-family: var(--font-mono);
+    font-size: 0.8rem;
+    color: var(--text-muted);
+    margin-top: 1.25rem;
+    margin-bottom: 0.4rem;
+}
+
+footer form label:first-of-type {
+    margin-top: 0;
+}
+
+footer form input[type="text"],
+footer form input[type="email"],
+footer form input[type="tel"],
+footer form select,
+footer form textarea {
+    width: 100%;
+    background-color: var(--bg);
+    border: 1px solid var(--panel-border);
+    border-radius: 6px;
+    padding: 0.7rem 0.85rem;
+    color: var(--text);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+footer form input[type="text"]:focus,
+footer form input[type="email"]:focus,
+footer form input[type="tel"]:focus,
+footer form select:focus,
+footer form textarea:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 0 0 3px var(--accent-soft);
+}
+
+footer form textarea {
+    min-height: 120px;
+    resize: vertical;
+    font-family: var(--font-body);
+}
+
+footer form select {
+    appearance: none;
+    background-image: linear-gradient(45deg, transparent 50%, var(--text-muted) 50%),
+        linear-gradient(135deg, var(--text-muted) 50%, transparent 50%);
+    background-position: calc(100% - 18px) center, calc(100% - 13px) center;
+    background-size: 5px 5px, 5px 5px;
+    background-repeat: no-repeat;
+}
+
+footer form br {
+    display: block;
+    content: '';
+    margin-top: 0.25rem;
+}
+
+/* Checkbox + label na mesma linha */
+footer form input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    margin-top: 1.5rem;
+    margin-right: 0.5rem;
+    accent-color: var(--accent);
+    vertical-align: middle;
+}
+
+footer form input[type="checkbox"] + label {
+    display: inline;
+    font-family: var(--font-body);
+    font-size: 0.88rem;
+    color: var(--text-muted);
+    margin: 0;
+    vertical-align: middle;
+}
+
+footer form input[type="submit"] {
+    margin-top: 1.75rem;
+    background-color: var(--accent);
+    color: #06201c;
+    border: none;
+    border-radius: 6px;
+    padding: 0.75rem 1.5rem;
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 0.95rem;
+    cursor: pointer;
+    transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+footer form input[type="submit"]:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 24px -10px rgba(110, 231, 216, 0.5);
+}
+
+footer form input[type="submit"]:active {
+    transform: translateY(0);
+}
+
+/* ---------- Responsivo ---------- */
+
+@media (max-width: 860px) {
+    #sobre {
+        grid-template-columns: 1fr;
+        grid-template-areas:
+            "title"
+            "photo"
+            "article"
+            "aside";
+    }
+
+    #sobre > img {
+        justify-self: start;
+    }
+}
+
+@media (max-width: 600px) {
+    header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+
+    nav ul {
+        flex-wrap: wrap;
+    }
+
+    footer form {
+        padding: 1.5rem;
+    }
+}
